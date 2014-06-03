@@ -31,7 +31,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   # rating_list = "PG, R"
   # uncheck = nil or "un"
-  
+
   rating_list.split(/,\s*/).each { |rating|  # , one or more spaces characters
     if uncheck
       uncheck "ratings_#{rating}" # checkboxes id = ratings_G
@@ -41,7 +41,11 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   }
 end
 
-Then /I should see all the movies/ do
-  # Make sure that all the movies in the app are visible in the table
-  flunk "Unimplemented"
+Then /I should see all the movies/ do 
+  # Make sure that all the movies in the app are visible in the table 
+  # have_css if from capybara
+  # expect is from rspec
+  # have_css with rpsec matcher == has_css capybara matcher
+  expect(page).to have_css("table#movies tbody tr", count: Movie.count)
+  #flunk "Unimplemented"
 end
